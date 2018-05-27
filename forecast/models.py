@@ -3,6 +3,7 @@ class Model:
     def __init__(self, **kwargs):
         self.param_defaults = {}
 
+
     @classmethod
     def from_json(cls, data, **kwargs):
         """ Create a new instance based on a JSON dict. Any kwargs should be
@@ -76,7 +77,6 @@ class Project(Model):
 class Person(Model):
 
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'first_name': None,
@@ -95,6 +95,7 @@ class Person(Model):
             'working_days': {},
             'color_blind': False
         }
+
 
         for (param, default) in self.param_defaults.items():
             setattr(self, param, kwargs.get(param, default))
