@@ -13,10 +13,17 @@ PyForecast
         :target: https://pyforecast.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
+Work In Progress
+----------------
+This project is currently under development. During sleepless nights, with two screaming kids :)  
+
+Please be patient. I would be grateful for any feedback & suggestions.
 
 
+Introduction
+------------
 
-Python binding for Forecast Harverst API - **Work In Progress**
+Python binding for `Forecast App <https://forecastapp.com>`_(Harvest) API
 
 
 * Free software: Apache Software License 2.0
