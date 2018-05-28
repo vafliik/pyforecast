@@ -16,7 +16,7 @@ PyForecast
 
 
 
-Python binding for Forecast Harverst API
+Python binding for Forecast Harverst API - **Work In Progress**
 
 
 * Free software: Apache Software License 2.0
@@ -26,7 +26,45 @@ Python binding for Forecast Harverst API
 Features
 --------
 
-* TODO
+Implemented
+^^^^^^^^^^^
+API wrappers for:
+- Client
+- Project
+- Person
+
+TO DO
+^^^^^^^^^^^
+- Who am I
+- Assignments
+- Milestones
+- User Connections
+- Placeholders
+- All PUT/POST requests (inserting/modifying data)
+
+=====
+Usage
+=====
+
+Create an Authorization token in Forecast App: https://id.getharvest.com/developers
+
+Create an instance of the ``forecast.Api`` using the Account ID and Authorization token::
+
+    >>> import forecast
+    >>> api = forecast.Api(account_id='account_id', authorization_token='authorization_token')
+
+Check correct login e.g. with ``whoami``::
+
+To fetch a single user's public status messages, where ``user`` is a Twitter user's screen name::
+
+    >>> for project in api.get_projects():
+    >>>    print(project.name, project.id)
+    Demo Project 101234
+    Killer App 106555
+
+    >>> person = api.get_person(42)
+    >>> print(person.first_name, person.last_name, person.email)
+    Pavel Pribyl pribyl.pavel@gmail.com
 
 Credits
 -------
