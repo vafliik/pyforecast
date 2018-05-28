@@ -35,7 +35,7 @@ setup(
     description="Python binding for Forecast Harverst API",
     entry_points={
         'console_scripts': [
-            'pyforecast=pyforecast.cli:main',
+            'pyforecast=forecast.cli:main',
         ],
     },
     install_requires=requirements,
@@ -44,7 +44,7 @@ setup(
     include_package_data=True,
     keywords='pyforecast',
     name='pyforecast',
-    packages=find_packages(include=['pyforecast']),
+    packages=find_packages(include=['forecast']),
     setup_requires=setup_requirements,
     test_suite='tests',
     tests_require=test_requirements,

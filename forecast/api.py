@@ -38,3 +38,9 @@ class Api:
         data = r.json()['people']
 
         return [Person.from_json(person) for person in data]
+
+    def get_person(self, person_id):
+        r = requests.get("{}/people/{}".format(self._base_url, person_id), headers=self._headers)
+        data = r.json()['person']
+
+        return Person.from_json(data)
