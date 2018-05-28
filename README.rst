@@ -28,7 +28,6 @@ Features
 
 Implemented
 ^^^^^^^^^^^
-API wrappers for:
 - Client
 - Project
 - Person
@@ -53,7 +52,6 @@ Create an instance of the ``forecast.Api`` using the Account ID and Authorizatio
     >>> import forecast
     >>> api = forecast.Api(account_id='account_id', authorization_token='authorization_token')
 
-Check correct login e.g. with ``whoami``::
 
 To fetch a single user's public status messages, where ``user`` is a Twitter user's screen name::
 
