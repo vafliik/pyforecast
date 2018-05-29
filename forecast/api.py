@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 
-from forecast import Client, Project, Person, Assignment, Milestone, Role, UserConnection
+from forecast import Client, Project, Person, Assignment, Milestone, Role, UserConnection, Placeholder
 
 """Main module."""
 
@@ -29,11 +29,23 @@ class Api:
 
         return [Project.from_json(project) for project in data]
 
+    def get_project(self, project_id):
+        r = requests.get("{}/projects/{}".format(self._base_url, project_id), headers=self._headers)
+        data = r.json()['project']
+
+        return Project.from_json(data)
+
     def get_clients(self):
         r = requests.get("{}/clients".format(self._base_url), headers=self._headers)
         data = r.json()['clients']
 
         return [Client.from_json(client) for client in data]
+
+    def get_client(self, client_id):
+        r = requests.get("{}/clients/{}".format(self._base_url, client_id), headers=self._headers)
+        data = r.json()['client']
+
+        return Project.from_json(data)
 
     def get_people(self):
         r = requests.get("{}/people".format(self._base_url), headers=self._headers)
@@ -102,6 +114,19 @@ class Api:
         data = r.json()['role']
 
         return Role.from_json(data)
+
+    def get_placeholders(self) -> List[Placeholder]:
+
+        r = requests.get("{}/placeholders".format(self._base_url), headers=self._headers)
+        data = r.json()['placeholders']
+
+        return [Placeholder.from_json(placeholder) for placeholder in data]
+
+    def get_placeholder(self, placeholder_id: int) -> Placeholder:
+        r = requests.get("{}/placeholders/{}".format(self._base_url, placeholder_id), headers=self._headers)
+        data = r.json()['placeholder']
+
+        return Placeholder.from_json(data)
 
     def get_user_connections(self) -> List[UserConnection]:
 
