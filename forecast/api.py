@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 
-from forecast import Client, Project, Person, Assignment, Milestone
+from forecast import Client, Project, Person, Assignment, Milestone, Role
 
 """Main module."""
 
@@ -89,6 +89,19 @@ class Api:
         data = r.json()['milestone']
 
         return Milestone.from_json(data)
+
+    def get_roles(self) -> List[Role]:
+
+        r = requests.get("{}/roles".format(self._base_url), headers=self._headers)
+        data = r.json()['roles']
+
+        return [Role.from_json(role) for role in data]
+
+    def get_role(self, role_id: int) -> Role:
+        r = requests.get("{}/roles/{}".format(self._base_url, role_id), headers=self._headers)
+        data = r.json()['role']
+
+        return Role.from_json(data)
 
     def whoami(self) -> Person:
         r = requests.get("{}/whoami".format(self._base_url), headers=self._headers)

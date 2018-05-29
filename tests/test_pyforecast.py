@@ -9,7 +9,7 @@ import pytest
 from click.testing import CliRunner
 
 import forecast
-from forecast import Client, Person, Assignment, Milestone
+from forecast import Client, Person, Assignment, Milestone, Role
 from forecast import cli
 
 
@@ -40,6 +40,7 @@ def test_person_from_json():
     assert person.working_days['monday']
     assert person.roles == ["MGMT", "Research", "Dark Knight"]
 
+
 def test_assignment_from_json():
     json_ = json.loads(
         '{"id": 1, "start_date": "2018-06-04", "end_date": "2018-06-08", "allocation": 10800, "notes": null,'
@@ -51,6 +52,7 @@ def test_assignment_from_json():
     assert assignment.person_id == 1
     assert assignment.project_id == 42
 
+
 def test_milestone_from_json():
     json_ = json.loads(
         '{"id": 333,"name": "Autopilot Finished","date": "2017-06-23","updated_at": "2017-06-22T13:01:16.067Z",'
@@ -60,6 +62,16 @@ def test_milestone_from_json():
     assert milestone.id == 333
     assert milestone.name == "Autopilot Finished"
     assert milestone.project_id == 42
+
+
+def test_role_from_json():
+    json_ = json.loads(
+        '{"id": 55,"name": "Batman family","placeholder_ids": [1], "person_ids": [1, 2, 3]} ')
+    role = Role.from_json(json_)
+    assert isinstance(role, Role)
+    assert role.id == 55
+    assert role.name == "Batman family"
+    assert role.person_ids == [1, 2, 3]
 
 
 def test_command_line_interface():
