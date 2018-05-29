@@ -9,7 +9,7 @@ import pytest
 from click.testing import CliRunner
 
 import forecast
-from forecast import Client, Person, Assignment, Milestone, Role, UserConnection, Placeholder
+from forecast import Client, Person, Assignment, Milestone, Role, UserConnection, Placeholder, Project
 from forecast import cli
 
 
@@ -19,7 +19,20 @@ def test_client_from_json():
         '"updated_at":"2017-06-13T15:14:46.193Z","updated_by_id":4242}')
     client = Client.from_json(json_)
     assert isinstance(client, Client)
-    assert client.name == 'Wayne Enterprises'
+    assert client.name == "Wayne Enterprises"
+
+def test_project_from_json():
+    json_ = json.loads(
+        '{"id":42,"name":"The Bat","color":"black","code":null,"notes":null,"start_date":"2017-05-29",'
+        '"end_date":"2018-08-31","harvest_id":null,"archived":false,"updated_at":"2018-05-28T14:48:39.048Z",'
+        '"updated_by_id":3,"client_id":123,"tags":["secret"]}')
+    project = Project.from_json(json_)
+    assert isinstance(project, Project)
+    assert project.name == "The Bat"
+    assert project.color == "black"     # of course :)
+    assert project.tags == ["secret"]
+    assert project.code == None
+    assert not project.archived
 
 
 def test_person_from_json():

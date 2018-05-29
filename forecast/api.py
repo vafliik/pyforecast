@@ -29,11 +29,23 @@ class Api:
 
         return [Project.from_json(project) for project in data]
 
+    def get_project(self, project_id):
+        r = requests.get("{}/projects/{}".format(self._base_url, project_id), headers=self._headers)
+        data = r.json()['project']
+
+        return Project.from_json(data)
+
     def get_clients(self):
         r = requests.get("{}/clients".format(self._base_url), headers=self._headers)
         data = r.json()['clients']
 
         return [Client.from_json(client) for client in data]
+
+    def get_client(self, client_id):
+        r = requests.get("{}/clients/{}".format(self._base_url, client_id), headers=self._headers)
+        data = r.json()['client']
+
+        return Project.from_json(data)
 
     def get_people(self):
         r = requests.get("{}/people".format(self._base_url), headers=self._headers)
