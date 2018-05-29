@@ -140,5 +140,5 @@ class Api:
 
     def whoami(self) -> Person:
         r = requests.get("{}/whoami".format(self._base_url), headers=self._headers)
-        user_id = r.json().get['current_user']['id']
+        user_id = r.json()['current_user']['id']
         return self.get_person(person_id=user_id)

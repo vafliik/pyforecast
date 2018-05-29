@@ -47,10 +47,10 @@ Implemented
 - Roles
 - User Connections
 - Placeholders
+- Who am I
 
 TO DO
 ^^^^^^^^^^^
-- Who am I
 - All PUT/POST requests (inserting/modifying data)
 - **Documentation**
 
