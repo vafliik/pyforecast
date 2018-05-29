@@ -67,7 +67,7 @@ Create an instance of the ``forecast.Api`` using the Account ID and Authorizatio
     >>> api = forecast.Api(account_id='account_id', authorization_token='authorization_token')
 
 
-To fetch a single user's public status messages, where ``user`` is a Twitter user's screen name::
+Example usage::
 
     >>> for project in api.get_projects():
     >>>    print(project.name, project.id)
