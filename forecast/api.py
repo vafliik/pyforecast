@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
+from typing import List
+
 import requests
 
-from forecast import Client, Project, Person, Assignment
+from forecast import Client, Project, Person, Assignment, Milestone
 
 """Main module."""
 
@@ -65,11 +67,28 @@ class Api:
 
         return [Assignment.from_json(assignment) for assignment in data]
 
-    def get_assignment(self, assignment_id:int) -> Assignment:
+    def get_assignment(self, assignment_id: int) -> Assignment:
         r = requests.get("{}/assignments/{}".format(self._base_url, assignment_id), headers=self._headers)
         data = r.json()['assignment']
 
         return Assignment.from_json(data)
+
+    def get_milestones(self, project_id: int = None) -> List[Milestone]:
+        params = {}
+
+        if project_id:
+            params['project_id'] = project_id
+
+        r = requests.get("{}/milestones".format(self._base_url), headers=self._headers, params=params)
+        data = r.json()['milestones']
+
+        return [Milestone.from_json(milestone) for milestone in data]
+
+    def get_milestone(self, milestone_id: int) -> Milestone:
+        r = requests.get("{}/milestones/{}".format(self._base_url, milestone_id), headers=self._headers)
+        data = r.json()['milestone']
+
+        return Milestone.from_json(data)
 
     def whoami(self) -> Person:
         r = requests.get("{}/whoami".format(self._base_url), headers=self._headers)
