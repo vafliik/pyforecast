@@ -15,7 +15,7 @@ PyForecast
 
 Work In Progress
 ----------------
-This project is currently under development. During sleepless nights, with two screaming kids :)  
+This project is currently under development. During sleepless nights, with two screaming kids :)
 
 Please be patient. I would be grateful for any feedback & suggestions.
 
@@ -42,15 +42,18 @@ Implemented
 - Client
 - Project
 - Person
+- Assignments
+- Milestones
+- Roles
+- User Connections
+- Placeholders
 
 TO DO
 ^^^^^^^^^^^
 - Who am I
-- Assignments
-- Milestones
-- User Connections
-- Placeholders
 - All PUT/POST requests (inserting/modifying data)
+- **Documentation**
+
 
 =====
 Usage
