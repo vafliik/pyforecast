@@ -3,7 +3,7 @@ from typing import List
 
 import requests
 
-from forecast import Client, Project, Person, Assignment, Milestone, Role
+from forecast import Client, Project, Person, Assignment, Milestone, Role, UserConnection
 
 """Main module."""
 
@@ -102,6 +102,16 @@ class Api:
         data = r.json()['role']
 
         return Role.from_json(data)
+
+    def get_user_connections(self) -> List[UserConnection]:
+
+        r = requests.get("{}/user_connections".format(self._base_url), headers=self._headers)
+        data = r.json()['user_connections']
+
+        return [UserConnection.from_json(connection) for connection in data]
+
+    def get_user_connection(self, user_connection_id: int) -> UserConnection:
+        raise NotImplementedError("This feature is not supported by Forecast App API yet")
 
     def whoami(self) -> Person:
         r = requests.get("{}/whoami".format(self._base_url), headers=self._headers)

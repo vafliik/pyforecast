@@ -9,12 +9,8 @@ import pytest
 from click.testing import CliRunner
 
 import forecast
-from forecast import Client, Person, Assignment, Milestone, Role
+from forecast import Client, Person, Assignment, Milestone, Role, UserConnection
 from forecast import cli
-
-
-def test_content():
-    api_ = forecast.Api('test', 'test')
 
 
 def test_client_from_json():
@@ -72,6 +68,19 @@ def test_role_from_json():
     assert role.id == 55
     assert role.name == "Batman family"
     assert role.person_ids == [1, 2, 3]
+
+def test_user_connection_from_json():
+    json_ = json.loads(
+        '{"id":1,"person_id":3,"last_active_at":"2018-05-29T09:40:01.000Z"}')
+    connection = UserConnection.from_json(json_)
+    assert isinstance(connection, UserConnection)
+    assert connection.id == 1
+    assert connection.last_active_at == "2018-05-29T09:40:01.000Z"
+
+def test_get_single_user_connection_is_not_supported():
+    api = forecast.Api('test', 'test')
+    with pytest.raises(NotImplementedError):
+        api.get_user_connection(1)
 
 
 def test_command_line_interface():
