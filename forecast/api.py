@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import requests
 
-from forecast import Client, Project, Person
+from forecast import Client, Project, Person, Assignment
 
 """Main module."""
 
@@ -44,3 +44,34 @@ class Api:
         data = r.json()['person']
 
         return Person.from_json(data)
+
+    def get_assignments(self, start_date=None, end_date=None, state='active',
+                        project_id=None, person_id=None, placeholder_id=None):
+        params = {'state': state}
+
+        if start_date:
+            params['start_date'] = start_date
+        if end_date:
+            params['end_date'] = end_date
+        if project_id:
+            params['project_id'] = project_id
+        if person_id:
+            params['person_id'] = person_id
+        if placeholder_id:
+            params['placeholder_id'] = placeholder_id
+
+        r = requests.get("{}/assignments".format(self._base_url), headers=self._headers, params=params)
+        data = r.json()['assignments']
+
+        return [Assignment.from_json(assignment) for assignment in data]
+
+    def get_assignment(self, assignment_id:int) -> Assignment:
+        r = requests.get("{}/assignments/{}".format(self._base_url, assignment_id), headers=self._headers)
+        data = r.json()['assignment']
+
+        return Assignment.from_json(data)
+
+    def whoami(self) -> Person:
+        r = requests.get("{}/whoami".format(self._base_url), headers=self._headers)
+        user_id = r.json().get['current_user']['id']
+        return self.get_person(person_id=user_id)

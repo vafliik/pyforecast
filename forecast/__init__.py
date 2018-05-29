@@ -6,5 +6,5 @@ __author__ = """Pavel Pribyl"""
 __email__ = 'pribyl.pavel@gmail.com'
 __version__ = '0.1.0'
 
-from .models import (Client, Project, Person)
+from .models import (Client, Project, Person, Assignment, Placeholder, Milestone, Role, UserConnection)
 from .api import Api
