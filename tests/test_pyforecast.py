@@ -17,7 +17,7 @@ def test_client_from_json():
     json_ = json.loads(
         '{"id":123,"name":"Wayne Enterprises","harvest_id":321,"archived":false,'
         '"updated_at":"2017-06-13T15:14:46.193Z","updated_by_id":4242}')
-    client = Client.from_json(json_)
+    client = Client.from_dict(json_)
     assert isinstance(client, Client)
     assert client.name == "Wayne Enterprises"
 
@@ -26,7 +26,7 @@ def test_project_from_json():
         '{"id":42,"name":"The Bat","color":"black","code":null,"notes":null,"start_date":"2017-05-29",'
         '"end_date":"2018-08-31","harvest_id":null,"archived":false,"updated_at":"2018-05-28T14:48:39.048Z",'
         '"updated_by_id":3,"client_id":123,"tags":["secret"]}')
-    project = Project.from_json(json_)
+    project = Project.from_dict(json_)
     assert isinstance(project, Project)
     assert project.name == "The Bat"
     assert project.color == "black"     # of course :)
@@ -43,7 +43,7 @@ def test_person_from_json():
         '"updated_at":"2018-02-06T13:14:57.725Z",'
         '"updated_by_id":1,"harvest_user_id":1,"weekly_capacity":null,'
         '"working_days":{"monday":true,"tuesday":true},"color_blind":false}')
-    person = Person.from_json(json_)
+    person = Person.from_dict(json_)
     assert isinstance(person, Person)
     assert person.first_name == 'Bruce'
     assert person.working_days['monday']
@@ -55,7 +55,7 @@ def test_assignment_from_json():
         '{"id": 1, "start_date": "2018-06-04", "end_date": "2018-06-08", "allocation": 10800, "notes": null,'
         '"updated_at": "2018-05-27T08:48:20.529Z", "updated_by_id": 2, "project_id": 42, "person_id": 1,'
         '"placeholder_id": null, "repeated_assignment_set_id": null, "active_on_days_off": false}')
-    assignment = Assignment.from_json(json_)
+    assignment = Assignment.from_dict(json_)
     assert isinstance(assignment, Assignment)
     assert assignment.id == 1
     assert assignment.person_id == 1
@@ -66,7 +66,7 @@ def test_milestone_from_json():
     json_ = json.loads(
         '{"id": 333,"name": "Autopilot Finished","date": "2017-06-23","updated_at": "2017-06-22T13:01:16.067Z",'
         '"updated_by_id": 3,"project_id": 42}')
-    milestone = Milestone.from_json(json_)
+    milestone = Milestone.from_dict(json_)
     assert isinstance(milestone, Milestone)
     assert milestone.id == 333
     assert milestone.name == "Autopilot Finished"
@@ -76,7 +76,7 @@ def test_milestone_from_json():
 def test_role_from_json():
     json_ = json.loads(
         '{"id": 55,"name": "Batman family","placeholder_ids": [1], "person_ids": [1, 2, 3]}')
-    role = Role.from_json(json_)
+    role = Role.from_dict(json_)
     assert isinstance(role, Role)
     assert role.id == 55
     assert role.name == "Batman family"
@@ -87,7 +87,7 @@ def test_placeholder_from_json():
     json_ = json.loads(
         '{"id":1,"name":"Bat Dummy","archived":false,"roles":["hero","Dark Knight","billionaire"],'
         '"updated_at":"2018-05-28T14:52:51.000Z","updated_by_id":1}')
-    role = Placeholder.from_json(json_)
+    role = Placeholder.from_dict(json_)
     assert isinstance(role, Placeholder)
     assert role.id == 1
     assert role.name == "Bat Dummy"
@@ -96,7 +96,7 @@ def test_placeholder_from_json():
 def test_user_connection_from_json():
     json_ = json.loads(
         '{"id":1,"person_id":3,"last_active_at":"2018-05-29T09:40:01.000Z"}')
-    connection = UserConnection.from_json(json_)
+    connection = UserConnection.from_dict(json_)
     assert isinstance(connection, UserConnection)
     assert connection.id == 1
     assert connection.last_active_at == "2018-05-29T09:40:01.000Z"

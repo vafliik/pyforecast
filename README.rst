@@ -27,7 +27,7 @@ Python binding for `Forecast App <https://forecastapp.com>`_ (Harvest) API
 
 Forecast is the fast and simple way to schedule your team across projects.
 
-As per `Forecast FAQ <https://help.getharvest.com/forecast/faqs/faq-list/api/>`_ there is not a *public API* for the app. This project uses the exposed backend API (looks like Forecas guys are OK with that)
+As per `Forecast FAQ <https://help.getharvest.com/forecast/faqs/faq-list/api/>`_ there is not a *public API* for the app. This project uses the exposed backend API (looks like Forecast guys are OK with that)
 
 
 * Free software: Apache Software License 2.0

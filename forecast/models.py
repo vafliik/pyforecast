@@ -1,32 +1,37 @@
+import json
+
+
 class Model:
 
     def __init__(self, **kwargs):
         self.param_defaults = {}
+        self._json_data = None
+
+    def initialize_parameters(self, **kwargs):
+        for (param, default) in self.param_defaults.items():
+            setattr(self, param, kwargs.get(param, default))
 
     @classmethod
-    def from_json(cls, data, **kwargs):
-        """ Create a new instance based on a JSON dict. Any kwargs should be
-        supplied by the inherited, calling class.
-
-        Args:
-            data: A JSON dict, as converted from the JSON in the Forecast API.
-
-        """
+    def from_dict(cls, data, **kwargs):
 
         json_data = data.copy()
         if kwargs:
             for key, val in kwargs.items():
                 json_data[key] = val
 
-        c = cls(**json_data)
-        c._json = data
-        return c
+        model = cls(**json_data)
+        model._json_data = json_data
+        return model
+
+    def to_json(self):
+        return json.dumps(self._json_data, sort_keys=True)
 
 
 class Client(Model):
     """A class representing the Client API structure. """
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'name': None,
@@ -36,8 +41,7 @@ class Client(Model):
             'updated_by_id': None,
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Client(name={name})".format(
@@ -48,6 +52,7 @@ class Client(Model):
 class Project(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'name': None,
@@ -64,8 +69,7 @@ class Project(Model):
             'tags': []
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Project(name={name})".format(
@@ -76,6 +80,7 @@ class Project(Model):
 class Person(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'first_name': None,
@@ -95,8 +100,7 @@ class Person(Model):
             'color_blind': False
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Person(name={first_name} {last_name}, email={email})".format(
@@ -109,6 +113,7 @@ class Person(Model):
 class Assignment(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'start_date': None,
@@ -124,8 +129,7 @@ class Assignment(Model):
             'active_on_days_off': False
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Assignment(start_date={start_date}, end_date={end_date}, project_id={pid})".format(
@@ -138,6 +142,7 @@ class Assignment(Model):
 class Milestone(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'name': None,
@@ -146,8 +151,7 @@ class Milestone(Model):
             'updated_by_id': None,
             'project_id': None}
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Milestone(name={name}, date={date}, project_id={pid})".format(
@@ -160,14 +164,14 @@ class Milestone(Model):
 class UserConnection(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'person_id': None,
             'last_active_at': None,
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "UserConnection(person_id={person_id}, last_active_at={date})".format(
@@ -179,6 +183,7 @@ class UserConnection(Model):
 class Role(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'name': None,
@@ -186,8 +191,7 @@ class Role(Model):
             'person_ids': [],
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Role(name={name})".format(
@@ -198,6 +202,7 @@ class Role(Model):
 class Placeholder(Model):
 
     def __init__(self, **kwargs):
+        super().__init__(**kwargs)
         self.param_defaults = {
             'id': None,
             'name': None,
@@ -207,8 +212,7 @@ class Placeholder(Model):
             'updated_by_id': None,
         }
 
-        for (param, default) in self.param_defaults.items():
-            setattr(self, param, kwargs.get(param, default))
+        self.initialize_parameters(**kwargs)
 
     def __repr__(self):
         return "Placeholder(name={name})".format(
