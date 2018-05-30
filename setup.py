@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=6.0', 'requests>=2.18.0']
+requirements = ['Click>=6.0', 'requests>=2.18.0', 'requests-cache>=0.4.13']
 
 setup_requirements = ['pytest-runner', ]
 
