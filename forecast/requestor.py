@@ -28,3 +28,7 @@ class Requestor:
         end = timer()
         print("Enpoint: {0} | Time: {1} | Cache: {2}".format(endpoint, end - start, r.from_cache, ))
         return r.json()
+
+    @staticmethod
+    def clear_cache():
+        requests_cache.clear()

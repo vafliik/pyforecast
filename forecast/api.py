@@ -101,6 +101,5 @@ class Api:
         user_id = data['current_user']['id']
         return self.get_person(person_id=user_id)
 
-    @staticmethod
-    def clear_cache():
-        requests_cache.clear()
+    def clear_cache(self):
+        self._requestor.clear_cache()
