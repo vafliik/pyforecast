@@ -5,11 +5,12 @@ class Model:
 
     def __init__(self, **kwargs):
         self.param_defaults = {}
-        self._json_data = None
+        self._json_data = {}
 
     def initialize_parameters(self, **kwargs):
         for (param, default) in self.param_defaults.items():
             setattr(self, param, kwargs.get(param, default))
+            self._json_data[param] = kwargs.get(param, default)
 
     @classmethod
     def from_dict(cls, data, **kwargs):

@@ -59,6 +59,22 @@ class Api:
         data = self._requestor.get("assignments/{}".format(assignment_id))
         return Assignment.from_dict(data['assignment'])
 
+    def create_assignment(self, start_date, end_date, project_id, person_id, placeholder_id=None, notes=None):
+        params = {'start_date': start_date, 'end_date': end_date, 'project_id': project_id, 'person_id': person_id}
+
+        if notes:
+            params['notes'] = notes
+        if placeholder_id:
+            params['placeholder_id'] = placeholder_id
+
+        data, status_code, text = self._requestor.post("assignments", params={'assignment': params})
+
+        if status_code == 201:
+            print("Assignment created successfully")
+            return Assignment.from_dict(data['assignment'])
+        else:
+            raise ValueError("API call responded with status {}\nResponse from the API: {}".format(status_code, text))
+
     def get_milestones(self, project_id: int = None) -> List[Milestone]:
         params = {}
 

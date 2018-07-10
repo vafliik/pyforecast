@@ -1,4 +1,4 @@
-from typing import Dict, Optional
+from typing import Dict, Optional, Tuple
 from timeit import default_timer as timer
 
 import requests
@@ -26,8 +26,15 @@ class Requestor:
         start = timer()
         r = requests.get("{}/{}".format(self._base_url, endpoint), headers=self._headers)
         end = timer()
-        print("Enpoint: {0} | Time: {1} | Cache: {2}".format(endpoint, end - start, r.from_cache, ))
+        print("GET: {0} | Time: {1} | Cache: {2}".format(endpoint, end - start, r.from_cache, ))
         return r.json()
+
+    def post(self, endpoint: str, params: Optional[Dict] = None) -> Tuple[Dict, int, str]:
+        start = timer()
+        r = requests.post("{}/{}".format(self._base_url, endpoint), headers=self._headers, json=params)
+        end = timer()
+        print("POST: {0} | Time: {1} | Cache: {2}".format(endpoint, end - start, r.from_cache, ))
+        return r.json(), r.status_code, r.text
 
     @staticmethod
     def clear_cache():
