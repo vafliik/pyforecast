@@ -64,7 +64,7 @@ Create an Authorization token in Forecast App: https://id.getharvest.com/develop
 Create an instance of the ``forecast.Api`` using the Account ID and Authorization token::
 
     >>> import forecast
-    >>> api = forecast.Api(account_id='account_id', authorization_token='authorization_token')
+    >>> api = forecast.Api(account_id='account_id', auth_token='authorization_token')
 
 
 Example usage::
